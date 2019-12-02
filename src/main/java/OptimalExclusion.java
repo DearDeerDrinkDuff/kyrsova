@@ -66,7 +66,7 @@ public class OptimalExclusion {
                 matrix[closestToRowIndex][col] *= diff;
             }
             b[closestToRowIndex] *= diff;
-
+        Matrix.prinAnytMatrix(matrix, b );
         }
         double[] x = new double[b.length];
         for (int column = 0; column < columns; column++) {
@@ -85,26 +85,6 @@ public class OptimalExclusion {
      * @return
      */
 
-
-    public static int findBestUnusedPivotIndex(double[][] matrix, int column, boolean[] usedRows) {
-        int closestToRowIndex = 0;
-        double closestToRowValue = matrix[0][column];
-        for (int i = 0; i < usedRows.length; i++) {
-            if (!usedRows[i]) {
-                closestToRowIndex = i;
-                closestToRowValue = matrix[i][column];
-                break;
-            }
-        }
-        for (int row = closestToRowIndex; row < matrix.length; row++) { // Optimization
-            if (!usedRows[row] && Math.abs(1 - closestToRowValue) > Math.abs(1 - matrix[row][column])) {
-                closestToRowIndex = row;
-                closestToRowValue = matrix[row][column];
-            }
-        }
-        usedRows[closestToRowIndex] = true;
-        return closestToRowIndex;
-    }
 
 
     /**
@@ -128,17 +108,17 @@ public class OptimalExclusion {
     public static Element findBiggestElement(double [][] matrix, int column,boolean [] used){
         Element element = new Element(0,0,0);
         double [][]temp = matrix.clone();
-        for (int i =0 ; i<temp.length; i++){
-            if(used[i]){
-                for (int j =0 ; j<matrix.length; j++){
-                    temp[i][j]=0;
-                }
-            }
-
-        }
+//        for (int i =0 ; i<temp.length; i++){
+//            if(used[i]){
+//                for (int j =0 ; j<matrix.length; j++){
+//                    temp[i][j]=0;
+//                }
+//            }
+//
+//        }
         for (int i =0 ; i<matrix.length;i++){
             for (int j =0 ; j<matrix.length; j++){
-                if (Math.abs(temp[i][j])>element.value){
+                if (Math.abs(temp[i][j])>element.value && j == column && !used[i] ){
                     element.value = temp[i][j];
                     element.raw = i;
                     element.column = j;

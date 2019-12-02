@@ -55,5 +55,19 @@ private static Scanner in = new Scanner(System.in);
         }
     }
 
+    public static void prinAnytMatrix(double [][] matrix, double [] solution){
+        for (int i =0 ; i<matrix.length;i++){
+            System.out.println();
+            for (int j = 0 ; j<=matrix.length; j++ ){
+                if (j==matrix.length){
+                    System.out.print("|"+solution[i]);
+                }else{
+                    System.out.print(matrix[i][j]+" ");
+                }
+            }
+        }
+        System.out.println();
+    }
+
 
 }
